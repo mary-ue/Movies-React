@@ -9,17 +9,21 @@ class Main extends React.Component {
   };
 
   async componentDidMount() {
-    fetch('http://www.omdbapi.com/?apikey=46210d70&s=happy')
+    fetch('http://www.omdbapi.com/?apikey=[]&s=happy')
       .then((response) => response.json())
       .then((data) => this.setState({ movies: data.Search }))
       .catch((err) => console.log('Ошибка при получении данных:', err));
   }
 
-  searchMovies = (str) => {
-    fetch(`http://www.omdbapi.com/?apikey=46210d70&s=${str}`)
-    .then((response) => response.json())
-    .then((data) => this.setState({ movies: data.Search }))
-    .catch((err) => console.log('Ошибка при получении данных:', err));
+  searchMovies = (str, type = 'all') => {
+    fetch(
+      `http://www.omdbapi.com/?apikey=[]&s=${str}${
+        type !== 'all' ? `&type=${type}` : ''
+      }`
+    )
+      .then((response) => response.json())
+      .then((data) => this.setState({ movies: data.Search }))
+      .catch((err) => console.log('Ошибка при получении данных:', err));
   };
 
   render() {

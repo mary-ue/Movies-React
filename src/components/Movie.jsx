@@ -8,14 +8,14 @@ function Movie(props) {
         {Poster === 'N/A' ? (
           <img
             className="activator"
-            src={`https://placehold.co/150x300?text=${Title}`}
+            src={`https://placehold.co/150x300?text=${Title}`} alt={Title}
           />
         ) : (
-          <img className="activator" src={Poster} />
+          <img className="activator" src={Poster} alt={Title}/>
         )}
       </div>
       <div className="card-content">
-        <span className="card-title activator grey-text text-darken-4">
+        <span className="card-title activator black-text text-darken-4">
           {Title}
         </span>
         <p>
