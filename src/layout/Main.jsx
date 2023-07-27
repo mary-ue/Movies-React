@@ -1,5 +1,7 @@
 import React from 'react';
 import { Movies } from '../components/Movies';
+import { Preloader } from '../components/Preloader';
+import { Search } from '../components/Search';
 
 class Main extends React.Component {
   state = {
@@ -7,33 +9,29 @@ class Main extends React.Component {
   };
 
   async componentDidMount() {
-    try {
-      const response = await fetch(
-        'http://www.omdbapi.com/?apikey=[key]&s=happy'
-      );
-      const data = await response.json();
-      this.setState({ movies: data.Search });
-      console.log(data.Search);
-    } catch (err) {
-      console.log('Ошибка при получении данных:', err);
-    }
+    fetch('http://www.omdbapi.com/?apikey=46210d70&s=happy')
+      .then((response) => response.json())
+      .then((data) => this.setState({ movies: data.Search }))
+      .catch((err) => console.log('Ошибка при получении данных:', err));
   }
 
+  searchMovies = (str) => {
+    fetch(`http://www.omdbapi.com/?apikey=46210d70&s=${str}`)
+    .then((response) => response.json())
+    .then((data) => this.setState({ movies: data.Search }))
+    .catch((err) => console.log('Ошибка при получении данных:', err));
+  };
+
   render() {
-    const {movies} = this.state;
+    const { movies } = this.state;
 
     return (
       <main className="content container">
-      {
-        movies.length ? 
-        (<Movies movies={this.state.movies} />) : 
-        <h3>Loading...</h3>
-      }
-        
+        <Search searchMovies={this.searchMovies} />
+        {movies.length ? <Movies movies={this.state.movies} /> : <Preloader />}
       </main>
     );
   }
 }
-
 
 export { Main };

@@ -25,3 +25,27 @@ nav {
   gap: 1rem;
 }
 
+/* Голубой цвет для прелоадера */
+.progress {
+  background-color: #82b1ff;
+}
+
+.progress .indeterminate {
+  background-color: #2962ff; 
+}
+
+.btn {
+  background-color: #82b1ff;
+}
+
+.btn:hover {
+  background-color: #448aff;
+}
+
+.search-btn {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+}
+
+
